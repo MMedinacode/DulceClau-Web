@@ -103,15 +103,17 @@ h1,h2,h3,h4{
   min-height:70px;display:flex;align-items:center;gap:12px}
 .brand{display:flex;align-items:center;gap:11px;text-decoration:none;margin-right:auto}
 /* El logotipo es su sello en miniatura, con el mismo borde ondulado. */
+/* ⚠️ 16-09-2026: antes esto era una imitación en CSS de su sello
+   (un conic-gradient haciendo de borde ondulado, con una letra al medio).
+   Matías consiguió el logo de verdad, así que ahora va la imagen. Se deja
+   el fondo rosa por debajo para que no se vea un hueco mientras carga. */
 .brand-mark{
   width:40px;height:40px;flex:none;border-radius:50%;
-  background:
-    radial-gradient(circle, var(--papel) 0 60%, transparent 60%),
-    repeating-conic-gradient(var(--rosa) 0deg 12deg, var(--rosa-cl) 12deg 24deg);
-  color:var(--vino);font-family:"Prata",serif;font-size:17px;line-height:1;
-  display:grid;place-content:center;
+  background:var(--rosa-cl);
+  display:grid;place-content:center;overflow:hidden;
   transition:transform .4s var(--fx);
 }
+.brand-mark img{width:100%;height:100%;object-fit:contain;display:block}
 .brand:hover .brand-mark{transform:rotate(22deg)}
 .brand-txt{display:flex;flex-direction:column;line-height:1.1}
 .brand-txt strong{font-family:"Sacramento",cursive;font-size:29px;font-weight:400;
@@ -676,3 +678,27 @@ h1,h2,h3,h4{
    derecha. Se le reserva un poco de alto arriba SOLO a las filas que
    realmente tienen "+", para que el precio baje y no se pisen. */
 .menu-item:has(> .uc-add){padding-top:26px}
+
+
+/* ─── Aviso de sorteo (TEMPORAL — borrar después del 18-09-2026) ─────
+   Va arriba del hero a propósito: es lo primero que se ve, porque es
+   lo único de la página con fecha de vencimiento. */
+.sorteo{
+  display:block; margin:0 0 22px;
+  background:linear-gradient(180deg,var(--rosa-cl),var(--papel));
+  border:1px solid var(--rosa); border-radius:var(--r);
+  padding:16px 18px; box-shadow:var(--sombra);
+}
+.sorteo-tag{
+  display:inline-block; margin-bottom:8px;
+  background:var(--vino); color:var(--papel);
+  font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+  padding:4px 10px; border-radius:999px;
+}
+.sorteo-txt{margin:0; color:var(--tinta); font-size:15px; line-height:1.5}
+.sorteo-txt b{color:var(--vino-osc)}
+.sorteo-pie{margin:8px 0 0; color:var(--gris); font-size:13px; line-height:1.45}
+@media (max-width:760px){
+  .sorteo{padding:14px 15px; margin-bottom:18px}
+  .sorteo-txt{font-size:14.5px}
+}
